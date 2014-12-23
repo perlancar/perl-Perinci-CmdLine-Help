@@ -71,7 +71,7 @@ sub gen_help {
             } keys %$common_opts) {
             my $co = $common_opts->{$_};
             next unless $co->{usage};
-            push @help, "  $progname $co->usage\n";
+            push @help, "  $progname $co->{usage}\n";
         }
 
         require Perinci::Sub::To::CLIDocData;
