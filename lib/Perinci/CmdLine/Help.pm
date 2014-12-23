@@ -25,8 +25,19 @@ $SPEC{gen_help} = {
             schema => 'str*',
         },
         meta => {
+            summary => 'Function metadata, must be normalized',
             schema => 'hash*',
             req => 1,
+        },
+        common_opts => {
+            schema => 'hash*',
+            default => {},
+        },
+        per_arg_json => {
+            schema => 'bool*',
+        },
+        per_arg_yaml => {
+            schema => 'bool*',
         },
     },
 };
@@ -34,6 +45,8 @@ sub gen_help {
     my %args = @_;
 
     my $meta = $args{meta};
+    my $common_opts = $args{common_opts} // {};
+
     my @help;
 
     # summary
@@ -51,30 +64,23 @@ sub gen_help {
     push @help, "\n";
     push @help, "Usage:\n";
     {
-        # we have subcommands but user has not specified any to choose
-        my $has_sc_no_sc = $self->subcommands && !length($r->{subcommand_name});
-
-        push @help, "  $progname --help (or -h, -?)\n";
-        push @help, "  $progname --version (or -v)\n";
-        push @help, "  $progname --subcommands\n" if $has_sc_no_sc;
+        for (sort {
+            ($common_opts->{$a}{order} // 99) <=>
+                ($common_opts->{$b}{order} // 99) ||
+                    $a cmp $b
+            } keys %$common_opts) {
+            my $co = $common_opts->{$_};
+            next unless $co->{usage};
+            push @help, "  $progname $co->usage\n";
+        }
 
         require Perinci::Sub::To::CLIDocData;
-        my $res;
-        if ($has_sc_no_sc) {
-            $res = Perinci::Sub::To::CLIDocData::gen_cli_doc_data_from_meta(
-                meta => {v=>1.1}, meta_is_normalized => 1,
-                common_opts  => $self->common_opts,
-                per_arg_json => $self->per_arg_json,
-                per_arg_yaml => $self->per_arg_yaml,
-            );
-        } else {
-            $res = Perinci::Sub::To::CLIDocData::gen_cli_doc_data_from_meta(
-                meta => $meta, meta_is_normalized => 1,
-                common_opts  => $self->common_opts,
-                per_arg_json => $self->per_arg_json,
-                per_arg_yaml => $self->per_arg_yaml,
-            );
-        }
+        my $res = Perinci::Sub::To::CLIDocData::gen_cli_doc_data_from_meta(
+            meta => $meta, meta_is_normalized => 1,
+            common_opts  => $common_opts,
+            per_arg_json => $args{per_arg_json},
+            per_arg_yaml => $args{per_arg_yaml},
+        );
         die [500, "gen_cli_doc_data_from_meta failed: ".
                  "$res->[0] - $res->[1]"] unless $res->[0] == 200;
         $clidocdata = $res->[2];
