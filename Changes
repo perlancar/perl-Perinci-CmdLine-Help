@@ -1,5 +1,10 @@
 Revision history for Perinci-CmdLine-Help
 
+0.02    2015-01-15 (PERLANCAR)
+
+	- Show subcommands, minor tweak.
+
+
 0.01     2014-12-23 (PERLANCAR)
 
          - First release, extracted from Perinci-CmdLine-Lite.
