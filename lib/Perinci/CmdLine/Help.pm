@@ -24,6 +24,9 @@ $SPEC{gen_help} = {
         program_summary => {
             schema => 'str*',
         },
+        subcommands => {
+            schema => 'hash',
+        },
         meta => {
             summary => 'Function metadata, must be normalized',
             schema => 'hash*',
@@ -89,10 +92,18 @@ sub gen_help {
         push @help, "  $usage\n";
     }
 
+    # subcommands
+    {
+        my $subcommands = $args{subcommands} or last;
+        push @help, "Subcommands:\n";
+        for (sort keys %$subcommands) {
+            push @help, "  $_\n";
+        }
+    }
+
     # example
     {
         last unless @{ $clidocdata->{examples} };
-        push @help, "\n";
         push @help, "Examples:\n";
         my $i = 0;
         my $egs = $clidocdata->{examples};
@@ -139,7 +150,7 @@ sub gen_help {
                 (my $b_without_dash = $b) =~ s/^-+//;
                 lc($a) cmp lc($b);
             } @opts;
-            push @help, "\n$cat:\n";
+            push @help, "$cat:\n";
             for my $opt (@opts) {
                 my $ospec = $opts->{$opt};
                 my $arg_spec = $ospec->{arg_spec};
