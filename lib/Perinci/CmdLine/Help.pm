@@ -96,8 +96,10 @@ sub gen_help {
     {
         my $subcommands = $args{subcommands} or last;
         push @help, "Subcommands:\n";
-        for (sort keys %$subcommands) {
-            push @help, "  $_\n";
+        for my $sc_name (sort keys %$subcommands) {
+            my $sc_spec = $subcommands->{$sc_name};
+            next unless $sc_spec->{show_in_help} //1;
+            push @help, "  $sc_name\n";
         }
     }
 
