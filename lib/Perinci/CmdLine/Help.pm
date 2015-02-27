@@ -96,10 +96,18 @@ sub gen_help {
     {
         my $subcommands = $args{subcommands} or last;
         push @help, "Subcommands:\n";
-        for my $sc_name (sort keys %$subcommands) {
-            my $sc_spec = $subcommands->{$sc_name};
-            next unless $sc_spec->{show_in_help} //1;
-            push @help, "  $sc_name\n";
+        if (keys(%$subcommands) >= 12) {
+            # comma-separated list
+            require Text::Wrap;
+            local $Text::Wrap::columns = $ENV{COLUMNS} // 80;
+            push @help, Text::Wrap::wrap(
+                "  ", "  ", join(", ", sort keys %$subcommands)), "\n";
+        } else {
+            for my $sc_name (sort keys %$subcommands) {
+                my $sc_spec = $subcommands->{$sc_name};
+                next unless $sc_spec->{show_in_help} //1;
+                push @help, "  $sc_name\n";
+            }
         }
     }
 
