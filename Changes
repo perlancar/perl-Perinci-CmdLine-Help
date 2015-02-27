@@ -1,5 +1,14 @@
 Revision history for Perinci-CmdLine-Help
 
+0.03    2015-02-27 (PERLANCAR)
+
+	- Show list of subcommands as comma-separated list if number of
+	  subcommands >= 12, like Perinci::CmdLine::Classic.
+
+	- Respect show_in_help=>0 in subcommand spec, like
+	  Perinci::CmdLine::Classic.
+
+
 0.02    2015-01-15 (PERLANCAR)
 
 	- Show subcommands, minor tweak.
