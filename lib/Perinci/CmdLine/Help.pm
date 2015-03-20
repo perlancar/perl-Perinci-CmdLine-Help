@@ -64,8 +64,7 @@ sub gen_help {
     my $clidocdata;
 
     # usage
-    push @help, "\n";
-    push @help, "Usage:\n";
+    push @help, "\nUsage:\n";
     {
         for (sort {
             ($common_opts->{$a}{order} // 99) <=>
@@ -95,7 +94,7 @@ sub gen_help {
     # subcommands
     {
         my $subcommands = $args{subcommands} or last;
-        push @help, "Subcommands:\n";
+        push @help, "\nSubcommands:\n";
         if (keys(%$subcommands) >= 12) {
             # comma-separated list
             require Text::Wrap;
@@ -114,7 +113,7 @@ sub gen_help {
     # example
     {
         last unless @{ $clidocdata->{examples} };
-        push @help, "Examples:\n";
+        push @help, "\nExamples:\n";
         my $i = 0;
         my $egs = $clidocdata->{examples};
         for my $eg (@$egs) {
@@ -131,10 +130,9 @@ sub gen_help {
     {
         my $desc = $args{program_description} // $meta->{description};
         last unless $desc;
-        push @help, "\n";
         $desc =~ s/\A\n+//;
         $desc =~ s/\n+\z//;
-        push @help, $desc, "\n";
+        push @help, "\n", $desc, "\n" if $desc =~ /\S/;
     }
 
     # options
@@ -160,7 +158,7 @@ sub gen_help {
                 (my $b_without_dash = $b) =~ s/^-+//;
                 lc($a) cmp lc($b);
             } @opts;
-            push @help, "$cat:\n";
+            push @help, "\n$cat:\n";
             for my $opt (@opts) {
                 my $ospec = $opts->{$opt};
                 my $arg_spec = $ospec->{arg_spec};
