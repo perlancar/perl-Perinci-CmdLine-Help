@@ -132,7 +132,7 @@ sub gen_help {
         last unless $desc;
         $desc =~ s/\A\n+//;
         $desc =~ s/\n+\z//;
-        push @help, "\n", $desc, "\n" if $desc =~ /\S/;
+        push @help, "\n", $desc, "\n\n" if $desc =~ /\S/;
     }
 
     # options
