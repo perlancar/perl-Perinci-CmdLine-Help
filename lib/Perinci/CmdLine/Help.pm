@@ -113,6 +113,7 @@ sub gen_help {
 
     # example
     {
+        # XXX categorize too, like options
         last unless @{ $clidocdata->{examples} };
         push @help, "\nExamples:\n";
         my $i = 0;
@@ -149,7 +150,11 @@ sub gen_help {
             push @{ $options_by_cat{$opts->{$_}{category}} }, $_;
         }
 
-        for my $cat (sort keys %options_by_cat) {
+        my $cats_spec = $clidocdata->{option_categories};
+        for my $cat (sort {
+            ($cats_spec->{$a}{order} // 50) <=> ($cats_spec->{$b}{order} // 50)
+                || $a cmp $b }
+                         keys %options_by_cat) {
             # find the longest option
             my @opts = sort {length($b)<=>length($a)}
                 @{ $options_by_cat{$cat} };
