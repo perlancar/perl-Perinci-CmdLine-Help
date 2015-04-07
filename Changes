@@ -1,5 +1,11 @@
 Revision history for Perinci-CmdLine-Help
 
+0.05    2015-04-07 (PERLANCAR)
+
+	- Properly order categories, from information provided by
+	  Perinci::Sub::To::CLIDocData 0.18.
+
+
 0.04    2015-04-04 (PERLANCAR)
 
         - Fix/tweak blank lines.
