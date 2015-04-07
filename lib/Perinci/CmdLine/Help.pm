@@ -144,14 +144,15 @@ sub gen_help {
         last unless keys %$opts;
 
         # find all the categories
-        my %cats; # val=[options...]
+        my %options_by_cat; # val=[options...]
         for (keys %$opts) {
-            push @{ $cats{$opts->{$_}{category}} }, $_;
+            push @{ $options_by_cat{$opts->{$_}{category}} }, $_;
         }
 
-        for my $cat (sort keys %cats) {
+        for my $cat (sort keys %options_by_cat) {
             # find the longest option
-            my @opts = sort {length($b)<=>length($a)} @{ $cats{$cat} };
+            my @opts = sort {length($b)<=>length($a)}
+                @{ $options_by_cat{$cat} };
             my $len = length($opts[0]);
             # sort again by name
             @opts = sort {
