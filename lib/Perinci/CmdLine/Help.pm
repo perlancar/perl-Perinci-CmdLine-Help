@@ -97,6 +97,7 @@ sub gen_help {
         push @help, "\nSubcommands:\n";
         if (keys(%$subcommands) >= 12) {
             # comma-separated list
+            no warnings 'once';
             require Text::Wrap;
             local $Text::Wrap::columns = $ENV{COLUMNS} // 80;
             push @help, Text::Wrap::wrap(
