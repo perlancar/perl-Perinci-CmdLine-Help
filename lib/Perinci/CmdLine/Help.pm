@@ -207,7 +207,7 @@ sub gen_help {
                     $add_sum,
                     $argv,
                     $cmdline_src,
-                    ($show_default ?
+                    ($show_default && defined($ospec->{default}) ?
                          " [".Data::Dmp::dmp($ospec->{default})."]":""),
 
                 );
