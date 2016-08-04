@@ -1,5 +1,10 @@
 Revision history for Perinci-CmdLine-Help
 
+0.09    2016-08-04 (PERLANCAR)
+
+	- [Bugfix] Hide options for arguments that have 'hidden' tag.
+
+
 0.08    2015-09-03 (PERLANCAR)
 
 	- No functional changes.
