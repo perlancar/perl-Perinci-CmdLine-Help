@@ -171,6 +171,7 @@ sub gen_help {
             for my $opt (@opts) {
                 my $ospec = $opts->{$opt};
                 my $arg_spec = $ospec->{arg_spec};
+                next if grep {$_ eq 'hidden'} @{$arg_spec->{tags} // []};
                 my $is_bool = $arg_spec->{schema} &&
                     $arg_spec->{schema}[0] eq 'bool';
                 my $show_default = exists($ospec->{default}) &&
