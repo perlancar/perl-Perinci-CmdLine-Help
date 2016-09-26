@@ -1,5 +1,10 @@
 Revision history for Perinci-CmdLine-Help
 
+0.10    2016-09-26 (PERLANCAR)
+
+	- Tweak format of examples.
+
+
 0.09    2016-08-04 (PERLANCAR)
 
 	- [Bugfix] Hide options for arguments that have 'hidden' tag.
