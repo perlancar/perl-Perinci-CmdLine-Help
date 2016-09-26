@@ -122,6 +122,7 @@ sub gen_help {
             $i++;
             my $cmdline = $eg->{cmdline};
             $cmdline =~ s/\[\[prog\]\]/$progname/;
+            push @help, "\n" if $eg->{summary} && $i > 1;
             push @help, "  $eg->{summary}:\n" if $eg->{summary};
             push @help, "  % $cmdline\n";
             push @help, "\n" if $eg->{summary} && $i < @$egs;
