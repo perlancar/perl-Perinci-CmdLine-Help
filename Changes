@@ -1,5 +1,10 @@
 Revision history for Perinci-CmdLine-Help
 
+0.11    2016-09-28 (PERLANCAR)
+
+	- Fix newlines formatting in example (again!).
+
+
 0.10    2016-09-26 (PERLANCAR)
 
 	- Tweak format of examples.
