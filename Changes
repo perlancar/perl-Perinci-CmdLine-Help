@@ -1,5 +1,13 @@
 Revision history for Perinci-CmdLine-Help
 
+0.13    2016-12-28 (PERLANCAR)
+
+	- No functional changes.
+
+	- [dist] Fix expressing follow-spec prereq relationship with
+	  x_spec.
+
+
 0.12    2016-12-27 (PERLANCAR)
 
 	- No functional changes.
