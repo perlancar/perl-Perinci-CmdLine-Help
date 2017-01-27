@@ -45,7 +45,12 @@ $SPEC{gen_help} = {
     },
 };
 sub gen_help {
+    no warnings 'once';
+    require Text::Wrap;
+
     my %args = @_;
+
+    local $Text::Wrap::columns = $ENV{COLUMNS} // 80;
 
     my $meta = $args{meta};
     my $common_opts = $args{common_opts} // {};
@@ -97,9 +102,6 @@ sub gen_help {
         push @help, "\nSubcommands:\n";
         if (keys(%$subcommands) >= 12) {
             # comma-separated list
-            no warnings 'once';
-            require Text::Wrap;
-            local $Text::Wrap::columns = $ENV{COLUMNS} // 80;
             push @help, Text::Wrap::wrap(
                 "  ", "  ", join(", ", sort keys %$subcommands)), "\n";
         } else {
@@ -210,7 +212,8 @@ sub gen_help {
                 push @help, sprintf(
                     "  %-${len}s  %s%s%s%s%s\n",
                     $opt,
-                    $ospec->{summary}//'',
+                    Text::Wrap::wrap("", " " x (2+$len+2 +2),
+                                     $ospec->{summary}//''),
                     $add_sum,
                     $argv,
                     $cmdline_src,
