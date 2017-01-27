@@ -185,11 +185,11 @@ sub gen_help {
 
                 my $add_sum = '';
                 if ($ospec->{is_base64}) {
-                    $add_sum = " (base64-encoded)";
+                    $add_sum = " (as base64-encoded str)";
                 } elsif ($ospec->{is_json}) {
-                    $add_sum = " (JSON-encoded)";
+                    $add_sum = " (as JSON-encoded str)";
                 } elsif ($ospec->{is_yaml}) {
-                    $add_sum = " (YAML-encoded)";
+                    $add_sum = " (as YAML-encoded str)";
                 }
 
                 my $argv = '';
