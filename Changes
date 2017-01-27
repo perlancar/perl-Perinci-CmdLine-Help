@@ -1,3 +1,11 @@
+0.14    2017-01-27 (PERLANCAR)
+
+	- [ux] Wrap long option summary.
+
+	- Tweak phrasing to be clearer: (JSON-encoded) et al to (as
+	  JSON-encoded str).
+
+
 0.13    2016-12-28 (PERLANCAR)
 
 	- No functional changes.
