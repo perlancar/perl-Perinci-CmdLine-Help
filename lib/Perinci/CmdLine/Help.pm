@@ -98,7 +98,7 @@ sub gen_help {
             common_opts  => $common_opts,
             per_arg_json => $args{per_arg_json},
             per_arg_yaml => $args{per_arg_yaml},
-            (ggls_res => $r->{_ggls_res}) x defined($r->{_ggls_res}),
+            (ggls_res => $args{ggls_res}) x defined($args{ggls_res}),
         );
         die [500, "gen_cli_doc_data_from_meta failed: ".
                  "$res->[0] - $res->[1]"] unless $res->[0] == 200;
