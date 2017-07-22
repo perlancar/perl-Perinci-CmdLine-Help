@@ -1,3 +1,9 @@
+0.15    2017-07-22 (PERLANCAR)
+
+	- [optimize] Use pre-calculated result of
+	  gen_getopt_long_spec_from_meta() in ggls_res if supplied.
+
+
 0.14    2017-01-27 (PERLANCAR)
 
 	- [ux] Wrap long option summary.
