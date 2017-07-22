@@ -42,6 +42,17 @@ $SPEC{gen_help} = {
         per_arg_yaml => {
             schema => 'bool*',
         },
+        ggls_res => {
+            summary => 'Full result from gen_getopt_long_spec_from_meta()',
+            schema  => 'array*', # XXX envres
+            description => <<'_',
+
+If you already call <pm:Perinci::Sub::GetArgs::Argv>'s
+`gen_getopt_long_spec_from_meta()`, you can pass the _full_ enveloped result
+here, to avoid calculating twice.
+
+_
+        },
     },
 };
 sub gen_help {
@@ -87,6 +98,7 @@ sub gen_help {
             common_opts  => $common_opts,
             per_arg_json => $args{per_arg_json},
             per_arg_yaml => $args{per_arg_yaml},
+            (ggls_res => $r->{_ggls_res}) x defined($r->{_ggls_res}),
         );
         die [500, "gen_cli_doc_data_from_meta failed: ".
                  "$res->[0] - $res->[1]"] unless $res->[0] == 200;
