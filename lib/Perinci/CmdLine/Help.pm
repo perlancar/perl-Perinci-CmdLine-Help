@@ -70,17 +70,16 @@ sub gen_help {
 
     # summary
     my $progname = $args{program_name};
-    push @help, $progname;
     {
         my $sum = $args{program_summary} // $meta->{summary};
         last unless $sum;
-        push @help, " - ", $sum, "\n";
+        push @help, $progname, " - ", $sum, "\n\n";
     }
 
     my $clidocdata;
 
     # usage
-    push @help, "\nUsage:\n";
+    push @help, "Usage:\n";
     {
         for (sort {
             ($common_opts->{$a}{order} // 99) <=>
