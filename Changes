@@ -1,3 +1,9 @@
+0.16    2017-07-24 (PERLANCAR)
+
+	- [ux] When there is no summary, skip producing the whole line
+	  because showing just the program name is not very useful.
+
+
 0.15    2017-07-22 (PERLANCAR)
 
 	- [optimize] Use pre-calculated result of
