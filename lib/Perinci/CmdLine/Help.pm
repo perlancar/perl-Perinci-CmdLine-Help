@@ -147,7 +147,9 @@ sub gen_help {
 
     # description
     {
-        my $desc = $args{program_description} // $meta->{description};
+        # XXX use proper alt. search
+        my $desc = $args{program_description} //
+            $meta->{'description.alt.env.cmdline'} // $meta->{description};
         last unless $desc;
         $desc =~ s/\A\n+//;
         $desc =~ s/\n+\z//;
