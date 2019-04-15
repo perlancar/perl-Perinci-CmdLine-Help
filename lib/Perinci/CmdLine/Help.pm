@@ -209,7 +209,7 @@ sub gen_help {
 
                 my $argv = '';
                 if (!$ospec->{main_opt} && defined($ospec->{pos})) {
-                    if ($ospec->{greedy}) {
+                    if ($ospec->{slurpy} // $ospec->{greedy}) {
                         $argv = " (=arg[$ospec->{pos}-])";
                     } else {
                         $argv = " (=arg[$ospec->{pos}])";
