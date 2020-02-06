@@ -69,7 +69,6 @@ sub gen_help {
     local $Text::Wrap::columns = $ENV{COLUMNS} // 80;
 
     my $meta = $args{meta} or return [400, 'Please specify meta'];
-    my $common_opts = $args{common_opts};
     unless ($args{meta_is_normalized}) {
         require Perinci::Sub::Normalize;
         $meta = Perinci::Sub::Normalize::normalize_function_metadata($meta);

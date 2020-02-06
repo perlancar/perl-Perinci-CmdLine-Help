@@ -1,3 +1,10 @@
+0.172   2020-02-06  Released-By: PERLANCAR; Urgency: medium
+
+	- Don't require metadata to be already normalized, provide
+	  meta_is_normalized option just like the others (e.g.
+	  Perinci::Sub::GetArgs::Argv).
+
+
 0.171   2019-04-15  Released-By: PERLANCAR
 
 	- Observe argument spec property 'slurpy' in addition to 'greedy'
