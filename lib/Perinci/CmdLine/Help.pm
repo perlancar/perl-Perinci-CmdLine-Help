@@ -1,6 +1,8 @@
 package Perinci::CmdLine::Help;
 
+# AUTHORITY
 # DATE
+# DIST
 # VERSION
 
 use 5.010001;
@@ -28,9 +30,12 @@ $SPEC{gen_help} = {
             schema => 'hash',
         },
         meta => {
-            summary => 'Function metadata, must be normalized',
+            summary => 'Function metadata',
             schema => 'hash*',
             req => 1,
+        },
+        meta_is_normalized => {
+            schema => 'bool*',
         },
         common_opts => {
             schema => 'hash*',
@@ -63,7 +68,12 @@ sub gen_help {
 
     local $Text::Wrap::columns = $ENV{COLUMNS} // 80;
 
-    my $meta = $args{meta};
+    my $meta = $args{meta} or return [400, 'Please specify meta'];
+    my $common_opts = $args{common_opts};
+    unless ($args{meta_is_normalized}) {
+        require Perinci::Sub::Normalize;
+        $meta = Perinci::Sub::Normalize::normalize_function_metadata($meta);
+    }
     my $common_opts = $args{common_opts} // {};
 
     my @help;
