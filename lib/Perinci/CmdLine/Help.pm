@@ -113,7 +113,7 @@ sub gen_help {
         $clidocdata = $res->[2];
         my $usage = $clidocdata->{usage_line};
         $usage =~ s/\[\[prog\]\]/$progname/;
-        push @help, "  $usage\n";
+        push @help, Text::Wrap::wrap("  ", "    ", "$usage\n");
     }
 
     # subcommands
