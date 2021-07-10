@@ -113,6 +113,7 @@ sub gen_help {
         $clidocdata = $res->[2];
         my $usage = $clidocdata->{usage_line};
         $usage =~ s/\[\[prog\]\]/$progname/;
+        local $Text::Wrap::break = '(?=\s)\X|(?<=\\|)';
         push @help, Text::Wrap::wrap("  ", "    ", "$usage\n");
     }
 
