@@ -1,16 +1,16 @@
 package Perinci::CmdLine::Help;
 
+use 5.010001;
+use strict;
+use warnings;
+
+use Exporter 'import';
+
 # AUTHORITY
 # DATE
 # DIST
 # VERSION
 
-use 5.010001;
-use strict;
-use warnings;
-
-require Exporter;
-our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(gen_help);
 
 our %SPEC;
