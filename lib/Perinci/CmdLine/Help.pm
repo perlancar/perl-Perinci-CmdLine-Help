@@ -58,6 +58,14 @@ here, to avoid calculating twice.
 
 _
         },
+        lang => {
+            summary => "Will be passed to Perinci::Sub::To::CLIDocData's gen_cli_doc_data_from_meta()",
+            schema => 'str*',
+        },
+        mark_different_lang => {
+            summary => "Will be passed to Perinci::Sub::To::CLIDocData's gen_cli_doc_data_from_meta()",
+            schema => 'bool*',
+        },
     },
 };
 sub gen_help {
@@ -107,6 +115,8 @@ sub gen_help {
             per_arg_json => $args{per_arg_json},
             per_arg_yaml => $args{per_arg_yaml},
             (ggls_res => $args{ggls_res}) x defined($args{ggls_res}),
+            (lang => $args{lang}) x defined($args{lang}),
+            (mark_different_lang => $args{mark_different_lang}) x defined($args{mark_different_lang}),
         );
         die [500, "gen_cli_doc_data_from_meta failed: ".
                  "$res->[0] - $res->[1]"] unless $res->[0] == 200;
